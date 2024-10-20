@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.38" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WafiArch.Domain\WafiArch.Domain.csproj" />
+    <ProjectReference Include="..\WafiArch.EntityFrameworkCore\WafiArch.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>
