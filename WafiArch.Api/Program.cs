@@ -14,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // postgredatabase
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"), b => b.MigrationsAssembly("WafiArche.EntityFrameworkCore"))
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
 );
 builder.Services.AddControllers();
 // Register AutoMapper
