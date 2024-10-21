@@ -13,13 +13,9 @@ namespace WafiArch.Api.Products
     public class ProductController : Controller
     {
         private readonly IProductAppService _productAppService;
-        private readonly IMapper _mapper;
-        private readonly ApplicationDbContext _context;
-        public ProductController(IProductAppService productAppService, IMapper mapper, ApplicationDbContext applicationDbContext)
+        public ProductController(IProductAppService productAppService)
         {
             _productAppService = productAppService;
-            _mapper = mapper;
-            _context = applicationDbContext;
         }
 
         [HttpPost]
@@ -42,8 +38,8 @@ namespace WafiArch.Api.Products
             return Ok(products);
         }
         
-        [HttpPut("{id}")]
-        ////[Route("[action]/{Id}")]
+        [HttpPut]
+        [Route("[action]/{Id}")]
         public IActionResult Update(int id, ProductDto product)
         {
             if(id != product.Id)
@@ -54,10 +50,10 @@ namespace WafiArch.Api.Products
             return Ok(productDto);
         }
 
-        [HttpPost]
-        [Route("[action]")]
+        [HttpDelete]
+        [Route("[action]/{id}")]
 
-        public ActionResult DeleteProduct(int id)
+        public IActionResult DeleteProduct(int id)
         {
             ProductDto product = _productAppService.Get(id);
 
@@ -66,22 +62,13 @@ namespace WafiArch.Api.Products
             _productAppService.Delete(id);
             return Ok();
         }
-
-
-
-
-
         [HttpGet]
-        
-        public async Task<List<ProductDto>> GetListAsync()
+        [Route("[action]/{id}")]
+        public IActionResult GetProductById(int id)
         {
-            var productList = await _context.Products.ToListAsync();
-            var mappedData = _mapper.Map<List<Product>,         
-            List<ProductDto>>(productList);
-
-            return mappedData;
+            ProductDto productDto = _productAppService.Get(id);
+            return Ok(productDto);
         }
-
     }
 
 }
